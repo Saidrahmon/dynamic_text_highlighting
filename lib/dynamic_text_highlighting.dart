@@ -64,7 +64,7 @@ class DynamicTextHighlighting extends StatelessWidget {
     if (text == '') {
       return _richText(_normalSpan(text));
     }
-    if (highlights.isEmpty) {
+    if (highlights=='') {
       return _richText(_normalSpan(text));
     }
     for (int i = 0; i < highlights.length; i++) {
