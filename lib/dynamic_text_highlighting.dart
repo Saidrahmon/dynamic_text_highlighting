@@ -13,21 +13,21 @@ class DynamicTextHighlighting extends StatelessWidget {
 
   //RichText
   final TextAlign textAlign;
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
   final bool softWrap;
   final TextOverflow overflow;
   final double textScaleFactor;
-  final int maxLines;
-  final Locale locale;
-  final StrutStyle strutStyle;
+  final int? maxLines;
+  final Locale? locale;
+  final StrutStyle? strutStyle;
   final TextWidthBasis textWidthBasis;
-  final TextHeightBehavior textHeightBehavior;
+  final TextHeightBehavior? textHeightBehavior;
 
   DynamicTextHighlighting({
     //DynamicTextHighlighting
-    Key key,
-    this.text,
-    this.highlights,
+    Key? key,
+    required this.text,
+    required this.highlights,
     this.color = Colors.yellow,
     this.style = const TextStyle(
       color: Colors.black,
@@ -79,12 +79,12 @@ class DynamicTextHighlighting extends StatelessWidget {
     }
 
     //Main code
-    List<TextSpan> _spans = List();
+    List<TextSpan> _spans = [];
     int _start = 0;
 
     //For "No Case Sensitive" option
     String _lowerCaseText = text.toLowerCase();
-    List<String> _lowerCaseHighlights = List();
+    List<String> _lowerCaseHighlights = [];
 
     highlights.forEach((element) {
       _lowerCaseHighlights.add(element.toLowerCase());
@@ -110,12 +110,14 @@ class DynamicTextHighlighting extends StatelessWidget {
       }
 
       if (_highlightsMap.isNotEmpty) {
-        List<int> _indexes = List();
+        List<int> _indexes = [];
         _highlightsMap.forEach((key, value) => _indexes.add(key));
 
         int _currentIndex = _indexes.reduce(min);
-        String _currentHighlight = text.substring(_currentIndex,
-            _currentIndex + _highlightsMap[_currentIndex].length);
+        String _currentHighlight = (_highlightsMap.containsKey(_currentIndex))
+            ? text.substring(_currentIndex,
+                _currentIndex + _highlightsMap[_currentIndex]!.length)
+            : '';
 
         if (_currentIndex == _start) {
           _spans.add(_highlightSpan(_currentHighlight));
