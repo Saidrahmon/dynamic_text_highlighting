@@ -46,7 +46,7 @@ class DynamicTextHighlighting extends StatelessWidget {
     this.textWidthBasis = TextWidthBasis.parent,
     this.textHeightBehavior,
   })  : assert(text != null),
-        assert(highlights != null),
+
         assert(color != null),
         assert(style != null),
         assert(caseSensitive != null),
@@ -69,11 +69,11 @@ class DynamicTextHighlighting extends StatelessWidget {
     }
     for (int i = 0; i < highlights.length; i++) {
       if (highlights[i] == null) {
-        assert(highlights[i] != null);
+
         return _richText(_normalSpan(text));
       }
       if (highlights[i].isEmpty) {
-        assert(highlights[i].isNotEmpty);
+
         return _richText(_normalSpan(text));
       }
     }
